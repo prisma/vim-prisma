@@ -4,6 +4,9 @@ endif
 
 syn case match
 
+" Comment
+syn match prismaComment "\v//.*$"
+" Directive
 syn match prismaDirective /\<@@\=\h\w*/ nextgroup=prismaFunctionParans
 " Ugly hack right now, probably this is not needed after refactoring
 syn match prismaPartialDirective /@@\=\h\w*/ nextgroup=prismaFunctionParans
@@ -42,6 +45,6 @@ hi def link prismaFunction Function
 hi def link prismaPartialDirective PreProc
 hi def link prismaValue Identifier
 hi def link prismaModel Delimiter
-
+hi def link prismaComment Comment
 
 let b:current_syntax = "prisma"
