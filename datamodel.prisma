@@ -19,8 +19,9 @@ enum Test2 {
   something = "something"
 }
 
-
+// but only inside a model so we need to adjust the plugin grammer
 model CoreStore {
+  // comments doesn't get properly highlighted yet
   id          Int     @id
   environment String?
   key         String?

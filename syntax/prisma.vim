@@ -15,10 +15,11 @@ syn match prismaFunction /\v\h\w*/ contained nextgroup=prismaFunctionParans
 syn match prismaFunctionArgs /\v\h\w*:/ contained containedin=prismaFunctionParans nextgroup=prismaString
 
 syn region prismaString start=/\v"/ skip=/\v\\./ end=/\v"/
-syn region prismaModelDeclaration matchgroup=prismaModel start=/\vmodel\s+\h\w*\s*\{/ end=/}/ contains=prismaOperator,prismaString,prismaFieldRegion,prismaDirective transparent
+" Model Declaration
+syn region prismaModelDeclaration matchgroup=prismaModel start=/\vmodel\s+\h\w*\s*\{/ end=/}/ contains=prismaComment,prismaOperator,prismaString,prismaFieldRegion,prismaDirective transparent
 syn match prismaField /\<\h\w*\>/ contained containedin=prismaFieldRegion nextgroup=prismaType skipwhite
 syn match prismaType /\<\h\w*\>/ contained containedin=prismaModelDeclaration nextgroup=prismaDirective skipwhite
-syn region prismaFieldRegion start=/\v^\s*/ms=e+1 end=/\v\s/me=s-1 contains=prismaField contained transparent containedin=prismaModelDeclaration skipwhite
+syn region prismaFieldRegion start=/\v^\s*/ms=e+1 end=/\v\s/me=s-1 contains=prismaField,prismaComment contained transparent containedin=prismaModelDeclaration skipwhite
 syn match prismaMultiFieldDirective /^\s*@/ contained containedin=prismaModelDeclaration nextgroup=prismaPartialDirective
 
 syn region prismaNonModelDeclaration matchgroup=prismaModel start=/\v((datasource)=(generator)=(enum)=)+\s+\h\w*\s*\{/ end=/}/ contains=prismaString,prismaList,prismaValueDeclarationRegion,prismaOperator transparent
