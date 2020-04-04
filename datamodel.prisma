@@ -8,6 +8,8 @@ generator photon {
     output = ["something"]
 }
 
+// now we need to highligh a type alias
+// currently the syntax grammer doesn't have them so only directives are highlighted 
 type CUID = String @id @default(cuid())
 
 enum Test {

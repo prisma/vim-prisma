@@ -13,6 +13,8 @@ syn match prismaPartialDirective /@@\=\h\w*/ nextgroup=prismaFunctionParans
 syn region prismaFunctionParans matchgroup=prismaParans start=/(/ end=/)/ contained contains=prismaString,prismaFunctionArgs,prismaFunction,prismaList
 syn match prismaFunction /\v\h\w*/ contained nextgroup=prismaFunctionParans
 syn match prismaFunctionArgs /\v\h\w*:/ contained containedin=prismaFunctionParans nextgroup=prismaString
+syn region prismaTypeAliasDeclaration matchgroup=prismaTypeAliasDeclaration start=/\vtype\s+/ end=/\v$/ contains=prismaValue,prismaDirective,prismaComment,prismaOperator
+
 
 syn region prismaString start=/\v"/ skip=/\v\\./ end=/\v"/
 " Model Declaration
@@ -23,7 +25,7 @@ syn region prismaFieldRegion start=/\v^\s*/ms=e+1 end=/\v\s/me=s-1 contains=pris
 syn match prismaMultiFieldDirective /^\s*@/ contained containedin=prismaModelDeclaration nextgroup=prismaPartialDirective
 
 syn region prismaNonModelDeclaration matchgroup=prismaModel start=/\v((datasource)=(generator)=(enum)=)+\s+\h\w*\s*\{/ end=/}/ contains=prismaString,prismaList,prismaValueDeclarationRegion,prismaOperator transparent
-syn match prismaValue /\<\h\w*\>/ contained containedin=prismaValueDeclarationRegion nextgroup=prismaOperator skipwhite
+syn match prismaValue /\<\h\w*\>/ contained containedin=prismaValueDeclarationRegion,prismaTypeAliasDeclaration nextgroup=prismaOperator skipwhite
 syn region prismaValueDeclarationRegion start=/\v^\s*/ms=e+1 end=/\v\s*/me=s-1 contains=prismaValueDeclaration contained transparent containedin=prismaNonModelDeclaration skipwhite
 
 syn match prismaOperator "?" display 
@@ -47,5 +49,6 @@ hi def link prismaPartialDirective PreProc
 hi def link prismaValue Identifier
 hi def link prismaModel Delimiter
 hi def link prismaComment Comment
+hi def link prismaTypeAliasDeclaration Keyword
 
 let b:current_syntax = "prisma"
