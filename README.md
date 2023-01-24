@@ -1,6 +1,6 @@
 # Prisma support for Vim
 
-This plugin is provides file detection and syntax highlighting support for [Prisma](https://github.com/prisma/prisma) in Vim.
+This plugin provides file detection and syntax highlighting support for [Prisma](https://github.com/prisma/prisma) in Vim.
 
 # Installation
 
