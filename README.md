@@ -1,14 +1,14 @@
-# Prisma 2 for Vim
+# Prisma support for Vim
 
-This plugin is provides file detection and syntax highlighting support for [Prisma 2](https://github.com/prisma/prisma2).
+This plugin provides file detection and syntax highlighting support for [Prisma](https://github.com/prisma/prisma) in Vim.
 
 # Installation
 
-> I recommend using [Vim plug](https://github.com/junegunn/vim-plug) for installation but this plugin is compatible with other vim package managers
+> We recommend using [Vim plug](https://github.com/junegunn/vim-plug) for installation, but this plugin is compatible with other vim package managers
 
 ## Using vim-plug
 
-1. Add `Plug 'pantharshit00/vim-prisma'` to your `.vimrc`
+1. Add `Plug 'prisma/vim-prisma'` to your `.vimrc`
 2. Run `vim +PlugInstall`
 
 # Screenshot
@@ -20,3 +20,7 @@ This plugin is provides file detection and syntax highlighting support for [Pris
 # License
 
 This plugin is licensed under the MIT license.
+
+# Acknowledgement
+
+Thanks to [Harshit Pant](https://github.com/pantharshit00) for initially creating and maintaining this plugin.
