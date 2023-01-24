@@ -3,22 +3,14 @@ datasource db {
   url      = "mysql://prisma:localhost:3306/strapi"
 }
 
-generator photon {
-  provider = "photonjs"
-    output = ["something"]
+generator client {
+  provider = "prisma-client-js"
+  output   = "something"
 }
-
-// now we need to highligh a type alias
-// currently the syntax grammer doesn't have them so only directives are highlighted 
-type CUID = String @id @default(cuid())
 
 enum Test {
   SOMETHING
-  SOMETHING
-}
-
-enum Test2 {
-  something = "something"
+  SOMETHING2
 }
 
 // but only inside a model so we need to adjust the plugin grammer
@@ -30,13 +22,13 @@ model CoreStore {
   tag         String? @default("test")
   type        String?
   value       String?
+
+  @@unique([key, tag])
   @@map("core_store")
-  @@unique(["something"])
-  @@id(["test"])
 }
 
 model Migration {
-  revision          Int       @id
+  revision          Int
   applied           Int
   databaseMigration String    @map("database_migration")
   datamodel         String
@@ -47,6 +39,8 @@ model Migration {
   rolledBack        Int       @map("rolled_back")
   startedAt         DateTime  @map("started_at")
   status            String
+
+  @@id([revision, applied])
   @@map("_Migration")
 }
 
@@ -57,6 +51,7 @@ model Post {
   reads     Int
   title     String
   updatedAt DateTime? @map("updated_at")
+
   @@map("posts")
 }
 
@@ -67,6 +62,7 @@ model StrapiAdministrator {
   password           String
   resetPasswordToken String?
   username           String
+
   @@map("strapi_administrator")
 }
 
@@ -83,6 +79,7 @@ model UploadFile {
   size      String
   updatedAt DateTime? @map("updated_at")
   url       String
+
   @@map("upload_file")
 }
 
@@ -92,6 +89,7 @@ model UploadFileMorph {
   relatedId    Int?    @map("related_id")
   relatedType  String? @map("related_type")
   uploadFileId Int?    @map("upload_file_id")
+
   @@map("upload_file_morph")
 }
 
@@ -103,6 +101,7 @@ model UsersPermissionsPermission {
   policy     String?
   role       Int?
   type       String
+
   @@map("users-permissions_permission")
 }
 
@@ -111,6 +110,7 @@ model UsersPermissionsRole {
   description String?
   name        String
   type        String?
+
   @@map("users-permissions_role")
 }
 
@@ -126,5 +126,6 @@ model UsersPermissionsUser {
   role               Int?
   updatedAt          DateTime? @map("updated_at")
   username           String
+
   @@map("users-permissions_user")
-} 
+}
