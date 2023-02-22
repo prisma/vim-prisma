@@ -5,7 +5,6 @@ endif
 syn case match
 
 " Comment
-" syn match prismaComment "\v//.*$"
 syn match prismaComment "\v\s*//.*$"
 " Directive
 syn match prismaDirective /\<@@\=\h\w*/ nextgroup=prismaFunctionParans
@@ -33,7 +32,6 @@ syn match prismaOperator "?" display
 syn match prismaOperator "\[\]" display 
 syn match prismaOperator /\v\=/ display
 syn region prismaList matchgroup=prismaList start="\[" end="]" contains=ALLBUT,prismaDirective,prismaModelDeclaration,prismaNonModelDeclaration
-syn keyword prismaKeyword model datasource generator
 
 hi def link prismaList Delimiter
 hi def link prismaParans Delimiter
@@ -51,6 +49,5 @@ hi def link prismaValue Identifier
 hi def link prismaModel Delimiter
 hi def link prismaComment Comment
 hi def link prismaTypeAliasDeclaration Keyword
-hi link prismaKeyword Keyword
 
 let b:current_syntax = "prisma"
