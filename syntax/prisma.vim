@@ -5,7 +5,8 @@ endif
 syn case match
 
 " Comment
-syn match prismaComment "\v//.*$"
+" syn match prismaComment "\v//.*$"
+syn match prismaComment "\v\s*//.*$"
 " Directive
 syn match prismaDirective /\<@@\=\h\w*/ nextgroup=prismaFunctionParans
 " Ugly hack right now, probably this is not needed after refactoring
@@ -24,7 +25,7 @@ syn match prismaType /\<\h\w*\>/ contained containedin=prismaModelDeclaration ne
 syn region prismaFieldRegion start=/\v^\s*/ms=e+1 end=/\v\s/me=s-1 contains=prismaField,prismaComment contained transparent containedin=prismaModelDeclaration skipwhite
 syn match prismaMultiFieldDirective /^\s*@/ contained containedin=prismaModelDeclaration nextgroup=prismaPartialDirective
 
-syn region prismaNonModelDeclaration matchgroup=prismaModel start=/\v((datasource)=(generator)=(enum)=)+\s+\h\w*\s*\{/ end=/}/ contains=prismaString,prismaList,prismaValueDeclarationRegion,prismaOperator transparent
+syn region prismaNonModelDeclaration matchgroup=prismaModel start=/\v((datasource)=(generator)=(enum)=)+\s+\h\w*\s*\{/ end=/}/ contains=prismaString,prismaList,prismaValueDeclarationRegion,prismaOperator,prismaComment transparent
 syn match prismaValue /\<\h\w*\>/ contained containedin=prismaValueDeclarationRegion,prismaTypeAliasDeclaration nextgroup=prismaOperator skipwhite
 syn region prismaValueDeclarationRegion start=/\v^\s*/ms=e+1 end=/\v\s*/me=s-1 contains=prismaValueDeclaration contained transparent containedin=prismaNonModelDeclaration skipwhite
 
@@ -32,7 +33,7 @@ syn match prismaOperator "?" display
 syn match prismaOperator "\[\]" display 
 syn match prismaOperator /\v\=/ display
 syn region prismaList matchgroup=prismaList start="\[" end="]" contains=ALLBUT,prismaDirective,prismaModelDeclaration,prismaNonModelDeclaration
-
+syn keyword prismaKeyword model datasource generator
 
 hi def link prismaList Delimiter
 hi def link prismaParans Delimiter
@@ -50,5 +51,6 @@ hi def link prismaValue Identifier
 hi def link prismaModel Delimiter
 hi def link prismaComment Comment
 hi def link prismaTypeAliasDeclaration Keyword
+hi link prismaKeyword Keyword
 
 let b:current_syntax = "prisma"
