@@ -11,6 +11,17 @@ This plugin provides file detection and syntax highlighting support for [Prisma]
 1. Add `Plug 'prisma/vim-prisma'` to your `.vimrc`
 2. Run `vim +PlugInstall`
 
+## Using Vim's native package system (Vim 8.0+)
+
+Vim 8 ships with a built-in package manager. You can install the plugin with
+the following commands:
+
+```
+mkdir -p ~/.vim/pack/plugins/start
+cd ~/.vim/pack/plugins/start
+git clone git@github.com:prisma/vim-prisma.git
+```
+
 # Screenshot
 
 ![image](https://user-images.githubusercontent.com/22195362/77247151-4f32bf80-6c54-11ea-88f9-99246476bc80.png)
